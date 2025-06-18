@@ -174,22 +174,14 @@ document.getElementById('add-money-form').addEventListener('submit', function(e)
   bankDetailsDiv.style.display = 'none';
 });
 
-document.getElementById('auth-container').addEventListener('submit', function(e) {
+document.getElementById('login-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+  window.location.href = `dashboard.html?user=${encodeURIComponent(username)}`;
+});
 
-  // Simple validation
-  if (username === '' || password === '') {
-    alert('Please fill in both fields.');
-    return;
-  }
-
-  // Simulate authentication (replace with real API call)
-  if (username === 'user' && password === 'password') {
-    alert('Login successful!');
-    window.location.href = 'dashboard.html'; // Redirect to dashboard
-  } else {
-    alert('Invalid credentials, please try again.');
-  }
+const params = new URLSearchParams(window.location.search);
+const user = params.get('user');
+if (user) {
+  document.getElementById('welcome-user').textContent = `Welcome, ${user}!`;
 }
